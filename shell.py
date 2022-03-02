@@ -21,19 +21,25 @@ while 1:
     if "search " in cmd:
         if "search package " in cmd:
             search =  cmd.replace("search package ","")
+            print("----------------------------------------")
+            print("Results:")
             for item in pcklist:
                 if ".py" in item and not "_" in item[0:1]:
                     if search in item:
                         pck = item.replace(".py","")
                         print(pck + " (" + item + ")")
+            print("----------------------------------------")
 
         elif "search app " in cmd:
             search =  cmd.replace("search app ","")
+            print("----------------------------------------")
+            print("Results:")
             for item in applist:
                 if ".py" in item and not "_" in item[0:1]:
                     if search in item:
                         app = item.replace(".py","")
                         print(app + " (" + item + ")")
+            print("----------------------------------------")
 
         else:
             print("Invalid Search Type!")
@@ -48,4 +54,3 @@ while 1:
 
     else:
         print("Invalid Command")
-
