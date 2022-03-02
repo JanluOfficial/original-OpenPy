@@ -3,6 +3,7 @@ import data.apps.packages.shell_api as shell_api
 import os
 import subprocess
 
+# Do not eat cheese at 69:42066AM
 
 curdir = os.getcwd()
 appdir = curdir + "\\data\\apps"
