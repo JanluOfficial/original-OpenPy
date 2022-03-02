@@ -15,7 +15,9 @@ shell_api.bigprint("OpenPy", "c")
 print(env)
 
 while 1:
+    print()
     cmd = input()
+    print()
     if "search " in cmd:
         if "search package " in cmd:
             search =  cmd.replace("search package ","")
@@ -41,10 +43,8 @@ while 1:
 
     elif "run " in cmd:
         app = cmd.replace("run ","")
-        app = app + '.pyquiu'
-        python_bin = appdir + '\\runenv'
-        script_file = appdir + '\\' + app
-        subprocess.Popen([python_bin, script_file])
+        appfile = app + '.py'
+        exec(open('data/apps/' + appfile + '').read())
 
     else:
         print("Invalid Command")
