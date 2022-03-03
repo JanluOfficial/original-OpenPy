@@ -9,13 +9,17 @@ curdir = os.getcwd()
 if not platform.system() == "Windows":
     appdir = curdir + "/data/apps"
     gamedir = curdir + "/data/games"
-    pckdir = curdir + "/data/apps/packages"
+    apppckdir = curdir + "/data/apps/apppck"
+    gamepckdir = curdir + "/data/apps/gamepck"
 else:
     appdir = curdir + "\\data\\apps"
     gamedir = curdir + "\\data\\games"
-    pckdir = curdir + "\\data\\apps\\packages"
+    apppckdir = curdir + "\\data\\apps\\apppck"
+    gamepckdir = curdir + "\\data\\apps\\gamepck"
 applist = os.listdir(appdir)
-pcklist = os.listdir(pckdir)
+apppcklist = os.listdir(apppckdir)
+gamelist = os.listdir(gamedir)
+gamepcklist = os.listdir(gamepckdir)
 
 env = shell_api.getdata("env")
 shell_api.bigprint("OpenPy", "c")
@@ -26,15 +30,15 @@ while 1:
     cmd = input("open_py> ") 
     print()
     if "search " in cmd:
-        if "search package " in cmd:
-            search =  cmd.replace("search package ","")
+        if "search app package " in cmd:
+            search =  cmd.replace("search apppck ","")
             print("----------------------------------------")
             print("Results:")
-            for item in pcklist:
+            for item in apppcklist:
                 if ".py" in item and not "_" in item[0:1]:
                     if search in item:
-                        pck = item.replace(".py","")
-                        print(pck + " (" + item + ")")
+                        apppck = item.replace(".py","")
+                        print(apppck + " (" + item + ")")
             print("----------------------------------------")
 
         elif "search app " in cmd:
@@ -46,6 +50,28 @@ while 1:
                     if search in item:
                         app = item.replace(".py","")
                         print(app + " (" + item + ")")
+            print("----------------------------------------")
+
+        elif "search game package " in cmd:
+            search =  cmd.replace("search game package ","")
+            print("----------------------------------------")
+            print("Results:")
+            for item in gamepcklist:
+                if ".py" in item and not "_" in item[0:1]:
+                    if search in item:
+                        gamepck = item.replace(".py","")
+                        print(gamepck + " (" + item + ")")
+            print("----------------------------------------")
+
+        elif "search game " in cmd:
+            search =  cmd.replace("search game ","")
+            print("----------------------------------------")
+            print("Results:")
+            for item in gamelist:
+                if ".py" in item and not "_" in item[0:1]:
+                    if search in item:
+                        game = item.replace(".py","")
+                        print(game + " (" + item + ")")
             print("----------------------------------------")
 
         else:
