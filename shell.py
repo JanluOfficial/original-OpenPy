@@ -1,4 +1,4 @@
-import data.apps.packages.shell_api as shell_api
+import data.apps.apppck.shell_api as shell_api
 import os
 import platform
 
@@ -8,9 +8,11 @@ curdir = os.getcwd()
 
 if not platform.system() == "Windows":
     appdir = curdir + "/data/apps"
+    gamedir = curdir + "/data/games"
     pckdir = curdir + "/data/apps/packages"
 else:
     appdir = curdir + "\\data\\apps"
+    gamedir = curdir + "\\data\\games"
     pckdir = curdir + "\\data\\apps\\packages"
 applist = os.listdir(appdir)
 pcklist = os.listdir(pckdir)
