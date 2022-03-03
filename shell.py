@@ -1,4 +1,3 @@
-from zoneinfo import TZPATH
 import data.apps.packages.shell_api as shell_api
 import os
 import platform

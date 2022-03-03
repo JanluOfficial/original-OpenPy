@@ -1,6 +1,5 @@
 import os
 import platform
-import tkinter
 
 # Basic Commands
 
