@@ -63,3 +63,12 @@ def getdata(data):
     else:
         returndata = 'Invalid Data Type!'
     return returndata
+
+def clear():
+    if os.name == "nt":
+        os.system("cls")
+    else:
+        os.system("clear")
+
+def newfunc():
+    print("Comming Soon!")

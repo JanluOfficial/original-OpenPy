@@ -1,13 +1,18 @@
 from zoneinfo import TZPATH
 import data.apps.packages.shell_api as shell_api
 import os
-import subprocess
+import platform
 
 # Do not eat cheese at 69:42066AM
 
 curdir = os.getcwd()
-appdir = curdir + "\\data\\apps"
-pckdir = curdir + "\\data\\apps\\packages"
+
+if not platform.system() == "Windows":
+    appdir = curdir + "/data/apps"
+    pckdir = curdir + "/data/apps/packages"
+else:
+    appdir = curdir + "\\data\\apps"
+    pckdir = curdir + "\\data\\apps\\packages"
 applist = os.listdir(appdir)
 pcklist = os.listdir(pckdir)
 
@@ -17,7 +22,7 @@ print(env)
 
 while 1:
     print()
-    cmd = input()
+    cmd = input("open_py> ") 
     print()
     if "search " in cmd:
         if "search package " in cmd:
@@ -52,6 +57,9 @@ while 1:
         app = cmd.replace("run ","")
         appfile = app + '.py'
         exec(open('data/apps/' + appfile + '').read())
+
+    elif cmd == "clear":
+        shell_api.clear()
 
     else:
         print("Invalid Command")
