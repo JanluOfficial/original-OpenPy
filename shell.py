@@ -1,6 +1,7 @@
 import data.apps.apppck.shell_api as shell_api
 import os
 import platform
+from os.path import exists
 
 # Do not eat cheese at 69:42066AM
 
@@ -18,8 +19,6 @@ else:
     gamepckdir = curdir + "\\data\\apps\\gamepck"
 applist = os.listdir(appdir)
 apppcklist = os.listdir(apppckdir)
-gamelist = os.listdir(gamedir)
-gamepcklist = os.listdir(gamepckdir)
 
 env = shell_api.getdata("env")
 shell_api.bigprint("OpenPy", "c")
@@ -29,11 +28,22 @@ while 1:
     print()
     cmd = input("open_py> ") 
     print()
+    
+    if cmd == "help":
+        print("Help Menu!")
+        print("----------------------------------------")
+        print("search <app/game> (package) [name] - Searches Apps and Games!")
+        print("quit - I think it explains itself, but it basically is for closing OpenPy!")
+        print("run <app/game> [name] - Used to open Apps and Games.")
+        print("clear - Clears the Console.")
+        print("----------------------------------------")
+        
+    
     if "search " in cmd:
         if "search app package " in cmd:
-            search =  cmd.replace("search apppck ","")
-            print("----------------------------------------")
+            search =  cmd.replace("search app package ","")
             print("Results:")
+            print("----------------------------------------")
             for item in apppcklist:
                 if ".py" in item and not "_" in item[0:1]:
                     if search in item:
@@ -43,35 +53,13 @@ while 1:
 
         elif "search app " in cmd:
             search =  cmd.replace("search app ","")
-            print("----------------------------------------")
             print("Results:")
+            print("----------------------------------------")
             for item in applist:
                 if ".py" in item and not "_" in item[0:1]:
                     if search in item:
                         app = item.replace(".py","")
                         print(app + " (" + item + ")")
-            print("----------------------------------------")
-
-        elif "search game package " in cmd:
-            search =  cmd.replace("search game package ","")
-            print("----------------------------------------")
-            print("Results:")
-            for item in gamepcklist:
-                if ".py" in item and not "_" in item[0:1]:
-                    if search in item:
-                        gamepck = item.replace(".py","")
-                        print(gamepck + " (" + item + ")")
-            print("----------------------------------------")
-
-        elif "search game " in cmd:
-            search =  cmd.replace("search game ","")
-            print("----------------------------------------")
-            print("Results:")
-            for item in gamelist:
-                if ".py" in item and not "_" in item[0:1]:
-                    if search in item:
-                        game = item.replace(".py","")
-                        print(game + " (" + item + ")")
             print("----------------------------------------")
 
         else:
@@ -81,13 +69,16 @@ while 1:
         exit()
 
     elif "run " in cmd:
-        app = cmd.replace("run ","")
+        app = cmd.replace("run app ","")
         appfile = app + '.py'
-        exec(open('data/apps/' + appfile + '').read())
+        if exists('data/apps' + appfile):
+            exec(open('data/apps/' + appfile + '').read())
+        else:
+            print("This app seems to not be installed. Don't worry about it, happens to the best of us.")
 
     elif cmd == "clear":
         shell_api.clear()
 
     else:
-        print("Invalid Command")
+        print("Oh no, that command doesn't seem to be valid. :(")
 
