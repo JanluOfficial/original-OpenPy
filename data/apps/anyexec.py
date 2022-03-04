@@ -1,2 +1,2 @@
-code = input("Execute>")
+code = input("execute>")
 exec(code)

@@ -1,8 +1,8 @@
 import data.apps.apppck.shell_api as shell_api
 import os
 import platform
+import subprocess
 from os.path import exists
-
 # Do not eat cheese at 69:42066AM
 
 curdir = os.getcwd()
@@ -69,12 +69,21 @@ while 1:
         exit()
 
     elif "run " in cmd:
-        app = cmd.replace("run app ","")
-        appfile = app + '.py'
-        if exists('data/apps' + appfile):
-            exec(open('data/apps/' + appfile + '').read())
+        app = cmd.replace("run ","")
+        if "-e " in app:
+            app = app.replace("-e ","")
+            appfile = app + '.exe'
+            if exists('data/apps/' + appfile):
+                subprocess.call(['data/apps/' + app])
+            else:
+                print("This app seems to not be installed. Don't worry about it, happens to the best of us.")
+        
         else:
-            print("This app seems to not be installed. Don't worry about it, happens to the best of us.")
+            appfile = app + '.py'
+            if exists('data/apps/' + appfile):
+                exec(open('data/apps/' + appfile + '').read())
+            else:
+                print("This app seems to not be installed. Don't worry about it, happens to the best of us.")
 
     elif cmd == "clear":
         shell_api.clear()
