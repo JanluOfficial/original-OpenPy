@@ -1,4 +1,4 @@
-import data.apps.apppck.shell_api as shell_api
+import data.apps.package.shell_api as shell_api
 import os
 import platform
 import subprocess
@@ -9,14 +9,10 @@ curdir = os.getcwd()
 
 if not platform.system() == "Windows":
     appdir = curdir + "/data/apps"
-    gamedir = curdir + "/data/games"
-    apppckdir = curdir + "/data/apps/apppck"
-    gamepckdir = curdir + "/data/apps/gamepck"
+    apppckdir = curdir + "/data/apps/package"
 else:
     appdir = curdir + "\\data\\apps"
-    gamedir = curdir + "\\data\\games"
-    apppckdir = curdir + "\\data\\apps\\apppck"
-    gamepckdir = curdir + "\\data\\apps\\gamepck"
+    apppckdir = curdir + "\\data\\apps\\package"
 applist = os.listdir(appdir)
 apppcklist = os.listdir(apppckdir)
 
@@ -40,7 +36,7 @@ while 1:
         
     
     if "search " in cmd:
-        if "search app package " in cmd:
+        if "search package " in cmd:
             search =  cmd.replace("search app package ","")
             print("Results:")
             print("----------------------------------------")
@@ -59,7 +55,13 @@ while 1:
                 if ".py" in item and not "_" in item[0:1]:
                     if search in item:
                         app = item.replace(".py","")
-                        print(app + " (" + item + ")")
+                        with open('data/apps/' + item).read() as appfile:
+                            first_line = appfile.readline()
+                            if first_line == "#isGame":
+                                print(app + "[Game] (" + item + ")")
+                            else:
+                                print(app + "(" + item + ")")
+                        
             print("----------------------------------------")
 
         else:
