@@ -2,6 +2,7 @@ import data.apps.package.shell_api as shell_api
 import os
 import platform
 import subprocess
+import json
 from os.path import exists
 # Do not eat cheese at 69:42066AM
 
@@ -16,8 +17,13 @@ else:
 applist = os.listdir(appdir)
 apppcklist = os.listdir(apppckdir)
 
+# Start-up JSON
+startupJSON = open("startup.json", "r")
+startupContent = startupJSON.read()
+startupList = json.loads(startupContent)
+
 env = shell_api.getdata("env")
-shell_api.bigprint("OpenPy", "c")
+shell_api.bigprint(startupList['welcome-message'], 'c')
 print(env)
 
 while 1:
