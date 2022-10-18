@@ -41,7 +41,8 @@ while 1:
         print("----------------------------------------")
         
     
-    if "search " in cmd:
+    if cmd.startswith("search "):
+        
         if "search package " in cmd:
             search =  cmd.replace("search app package ","")
             print("Results:")
